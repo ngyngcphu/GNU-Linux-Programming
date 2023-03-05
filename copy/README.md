@@ -7,7 +7,7 @@
 * `strace -o system_call ./fileCopy`.
 * Enter input file and output file.
 ## Some system calls in system_call
-* Line 1 `int execve(const char *pathname, char* const argv[], char* const envp[])` \\
+* Line 1 `int execve(const char *pathname, char* const argv[], char* const envp[])`  
 Executes the program pointed to by the filename.
 ***
 * Line 2 `int brk(void* addr)`\\
