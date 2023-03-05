@@ -1,4 +1,4 @@
-# A programming for copying text files.
+# A programming for copying text files using POSIX API and C standard library.
 ## Step to run the program
 * `gcc fileCopy.c -o fileCopy`.
 * `./fileCopy`.
