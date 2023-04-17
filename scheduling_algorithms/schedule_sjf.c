@@ -16,11 +16,15 @@ void add(char *name, int priority, int burst) {
 }
 
 Task *pickNextTask() {
-    struct node *lastTask = taskList;
-    while(lastTask->next) {
-        lastTask = lastTask->next;
+    Task *shortestTask = taskList->task;
+    struct node *temp = taskList;
+    while (temp) {
+        if (temp->task->burst <= shortestTask->burst) {
+            shortestTask = temp->task;
+        }
+        temp = temp->next;
     }
-    return lastTask->task;
+    return shortestTask;
 }
 
 void schedule() {
