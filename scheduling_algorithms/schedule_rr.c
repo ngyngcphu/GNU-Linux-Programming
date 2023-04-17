@@ -37,7 +37,7 @@ void schedule()
         runTask->remaining_burst -= slice;
         if (runTask->remaining_burst)
         {
-            delete (&taskList, runTask);
+            delete(&taskList, runTask);
             insert(&taskList, runTask);
         }
         else
