@@ -19,17 +19,16 @@ void add(char *name, int priority, int burst)
 
 Task *getNextTask()
 {
-    Task *shortestTask = taskList->task;
+    Task *highestPriorityTask = taskList->task;
     struct node *temp = taskList;
     while (temp)
     {
-        if (temp->task->burst <= shortestTask->burst)
-        {
-            shortestTask = temp->task;
+        if (temp->task->priority >= highestPriorityTask->priority) {
+            highestPriorityTask = temp->task;
         }
         temp = temp->next;
     }
-    return shortestTask;
+    return highestPriorityTask;
 }
 
 void schedule()
@@ -38,7 +37,7 @@ void schedule()
     {
         Task *runTask = getNextTask();
         run(runTask, runTask->burst);
-        delete (&taskList, runTask);
+        delete(&taskList, runTask);
         free(runTask->name);
         free(runTask);
     }

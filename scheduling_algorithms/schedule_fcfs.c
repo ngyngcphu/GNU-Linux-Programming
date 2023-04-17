@@ -1,12 +1,14 @@
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "schedulers.h"
 #include "list.h"
 #include "cpu.h"
 
 struct node *taskList = NULL;
 
-void add(char *name, int priority, int burst) {
+void add(char *name, int priority, int burst)
+{
     Task *newTask = malloc(sizeof(Task));
     newTask->name = malloc(sizeof(char) * (strlen(name) + 1));
     strcpy(newTask->name, name);
@@ -15,19 +17,23 @@ void add(char *name, int priority, int burst) {
     insert(&taskList, newTask);
 }
 
-Task *pickNextTask() {
+Task *getNextTask()
+{
     struct node *lastTask = taskList;
-    while(lastTask->next) {
+    while (lastTask->next)
+    {
         lastTask = lastTask->next;
     }
     return lastTask->task;
 }
 
-void schedule() {
-    while (taskList) {
-        Task *runTask = pickNextTask();
+void schedule()
+{
+    while (taskList)
+    {
+        Task *runTask = getNextTask();
         run(runTask, runTask->burst);
-        delete(&taskList, runTask);
+        delete (&taskList, runTask);
         free(runTask->name);
         free(runTask);
     }
