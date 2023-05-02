@@ -30,7 +30,8 @@ struct pcb_t *get_proc(void)
     pthread_mutex_lock(&queue_lock);
     if (empty(&ready_queue))
     {
-        while (!empty(run_queue)) {
+        while (!empty(run_queue))
+        {
             enqueue(&ready_queue, dequeue(&run_queue));
         }
     }
@@ -40,13 +41,15 @@ struct pcb_t *get_proc(void)
     return proc;
 }
 
-void put_proc(struct pcb_t *proc) {
+void put_proc(struct pcb_t *proc)
+{
     pthread_mutex_lock(&queue_lock);
     enqueue(&run_queue, proc);
     pthread_mutex_unlock(&queue_lock);
 }
 
-void add_proc(struct pcb_t *proc) {
+void add_proc(struct pcb_t *proc)
+{
     pthread_mutex_lock(&queue_lock);
     enqueue(&ready_queue, proc);
     pthread_mutex_unlock(&queue_lock);
